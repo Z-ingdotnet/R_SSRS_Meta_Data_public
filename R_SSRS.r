@@ -68,10 +68,12 @@ INNER JOIN [IZDBAPRDSSRS01].[ReportServer].[dbo].[Users] f ON e.CreatedByID=f.Us
 )
 
 ######################################################################################
-### Meta Data Wraggling : Programaticaly extract names,dataset used and queries embedded from reports Wwhere its SQL queries contain specific variable(s) of interest
+### MetaData Wraggling : Programmatically extract report names,dataset used and queries embedded from reports where its SQL queries contain specific variable(s) of interest
 ######################################################################################
-# regular expression lookup columns contain specific columns
-metadata2<-metadata[grep("Freegifts", metadata$reportXML), ]
+
+
+# regular expression lookup report in which its SQL queries contain specific columns
+metadata2<-metadata[grep("Freegifts", metadata$CommandText), ]
 
 # de-dup reports
 metadata3<-distinct(metadata2,NAME, .keep_all= TRUE)
